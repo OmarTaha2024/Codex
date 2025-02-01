@@ -1,0 +1,74 @@
+# CodexApp Usage Flow Documentation
+
+## Overview
+This document outlines the step-by-step usage flow of CodexApp, covering the complete process from adding instructors and mentors to managing student records and course materials.
+
+---
+
+## Usage Flow
+
+### **Step 1: Adding Instructors**
+- Navigate to the **Instructor Form**.
+- Enter the instructor's details (Name, Expertise, Contact Information, etc.).
+- Click **Submit** to save the instructor's data in the system.
+
+### **Step 2: Adding Mentors**
+- Navigate to the **Mentor Form**.
+- Enter the mentor's details.
+- Click **Submit** to store the mentor's information.
+
+### **Step 3: Adding Courses**
+- Go to the **Courses Form**.
+- Enter course details (Course Name, Description, Duration, Assigned Instructor/Mentor).
+- Click **Submit** to add the course to the system.
+
+### **Step 4: Adding Course Materials to Sessions**
+- Navigate to the **Sessions Form**.
+- Select the course and the corresponding session.
+- Upload or enter the required **materials** for the session.
+- Click **Submit** to save the session materials.
+
+### **Step 5: Adding Tasks, Quizzes, and Projects**
+- Navigate to the **Tasks and Quizzes Management Section**.
+- Enter the **task names, quiz names, and project titles** (without adding material links yet).
+- Click **Submit** to store these items in the system.
+
+### **Step 6: Adding Students**
+- Go to the **Students Form**.
+- Enter student details (Name, Email, Phone Number, etc.).
+- Select the course the student is enrolling in.
+- Click **Submit** to save the student record.
+
+### **Step 7: Recording Attendance and Grades**
+- Navigate to the **Attendance and Grading Section**.
+- Select a student and their enrolled course.
+- Record attendance for each session.
+- Enter scores for **quizzes, tasks, and projects**.
+- Click **Submit** to save attendance and grades.
+
+### **Step 8: Updating Student Final Grades**
+- Go to the **Student Records Page**.
+- Review and update the student's **overall grade** based on their scores.
+- Click **Submit** to confirm final grades.
+
+### **Step 9: Viewing Course Details**
+- To view course details, navigate to the **Course Page**.
+- Select a specific course to view its details, materials, assigned instructor/mentor, and enrolled students.
+
+---
+
+## **Summary of Workflow**
+```plaintext
+1. Add Instructors
+2. Add Mentors
+3. Add Courses
+4. Add Course Materials for Sessions
+5. Add Tasks, Quizzes, and Projects
+6. Add Students and Assign Courses
+7. Record Attendance and Student Grades
+8. Update Student Overall Grades
+9. View Course Details
+```
+
+This documentation provides a structured view of how a user interacts with the system, ensuring smooth workflow management.
+
