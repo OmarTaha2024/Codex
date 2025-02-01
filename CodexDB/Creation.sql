@@ -1,6 +1,21 @@
--- Create Courses Table
+
+CREATE TABLE Instructors (
+    InstructorID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    MonthlyEvaluation TEXT
+);
+
+
+CREATE TABLE Mentors (
+    MentorID INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(255) NOT NULL,
+    MonthlyEvaluation TEXT
+);
+
+
 CREATE TABLE Courses (
-    CourseID INT PRIMARY KEY IDENTITY(1,1),
+    CourseID INT NOT NULL,
+    RoundNumber INT NOT NULL,
     Name VARCHAR(255) NOT NULL,
     Type VARCHAR(100),
     Category VARCHAR(100),
@@ -12,35 +27,15 @@ CREATE TABLE Courses (
     TotalCost AS (MarketingCost + SalesCost + InstCost + MentorCost + WorkSpaceCost),
     StartDate DATETIME NOT NULL,
     EndDate DATETIME,
+    InstructorID INT NOT NULL,
+    MentorID INT NOT NULL,
+    PRIMARY KEY (CourseID, RoundNumber),
+    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (MentorID) REFERENCES Mentors(MentorID) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT CK_Courses_StartEndDate CHECK (StartDate < EndDate)
 );
 
--- Create Instructors Table
-CREATE TABLE Instructors (
-    InstructorID INT PRIMARY KEY IDENTITY(1,1),
-    Name VARCHAR(255) NOT NULL,
-    MonthlyEvaluation TEXT
-);
 
--- Create Mentors Table
-CREATE TABLE Mentors (
-    MentorID INT PRIMARY KEY IDENTITY(1,1),
-    Name VARCHAR(255) NOT NULL,
-    MonthlyEvaluation TEXT
-);
-
--- Create Rounds Table
-CREATE TABLE Rounds (
-    RoundID INT PRIMARY KEY IDENTITY(1,1),
-    CourseID INT NOT NULL,
-    InstructorID INT NOT NULL,
-    MentorID INT NOT NULL,
-    StartDate DATETIME NOT NULL,
-    EndDate DATETIME,
-    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (MentorID) REFERENCES Mentors(MentorID) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 -- Create Students Table
 CREATE TABLE Students (
@@ -51,32 +46,26 @@ CREATE TABLE Students (
     PaymentType VARCHAR(50)
 );
 
--- Create Enrollments Table
+-- Update the Enrollments table to reference the new Courses table
 CREATE TABLE Enrollments (
     EnrollmentID INT PRIMARY KEY IDENTITY(1,1),
     StudentID INT NOT NULL,
-    RoundID INT NOT NULL,
-    InstructorID INT NOT NULL,
-    MentorID INT NOT NULL,
+    CourseID INT NOT NULL,
+    RoundNumber INT NOT NULL,
     GeneralGrade DECIMAL(5, 2),
     InstructorFeedback TEXT,
     FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (RoundID) REFERENCES Rounds(RoundID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (MentorID) REFERENCES Mentors(MentorID) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (CourseID, RoundNumber) REFERENCES Courses(CourseID, RoundNumber) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT CK_Enrollments_Grade CHECK (GeneralGrade >= 0 AND GeneralGrade <= 100)
 );
 
--- Create Sessions Table
+-- Update the Sessions table to reference the new Courses table
 CREATE TABLE Sessions (
     SessionID INT PRIMARY KEY IDENTITY(1,1),
-    RoundID INT NOT NULL,
-    InstructorID INT NOT NULL,
-    MentorID INT NOT NULL,
+    CourseID INT NOT NULL,
+    RoundNumber INT NOT NULL,
     MaterialLink TEXT,
-    FOREIGN KEY (RoundID) REFERENCES Rounds(RoundID) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (MentorID) REFERENCES Mentors(MentorID) ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (CourseID, RoundNumber) REFERENCES Courses(CourseID, RoundNumber) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Create Tasks Table
